@@ -1,0 +1,8 @@
+{
+  "name": "space-invaders-3d",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "catch2",
+    "sdl2"
+  ]
+}
