@@ -87,6 +87,10 @@ void graphics::sdl2_renderer::draw_triangle(
         float z = (v[2] != 0) ? v[2] : 1.0f;
         float x = v[0] / z, y = v[1] / z;
 
+        if (x < -1.0f || x > 1.0f ||
+            y < -1.0f || y > 1.0f)
+            return;
+
         float screen_x = (width / 2.0f) + (x / w) * (width / w);
         float screen_y = height - ((height / 2.0f) + (y / w) * (height / w));
 

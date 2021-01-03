@@ -18,7 +18,7 @@ private:
 		contract,
 	};
 
-	static constexpr float MAX_SIZE = 3.0f;
+	static constexpr float MAX_SIZE = 1.5f;
 	static constexpr float MIN_SIZE = 1.0f;
 	static constexpr float SIZE_INCREMENT = 0.001f;
 
