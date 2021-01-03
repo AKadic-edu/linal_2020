@@ -6,6 +6,16 @@ graphics::transform::transform()
 	, m_translation_matrix { math::matrix<float, 4, 4>::identity() }
 { }
 
+const math::vector<float, 3> graphics::transform::scale() const
+{
+	return { m_scaling_matrix[0][0], m_scaling_matrix[1][1], m_scaling_matrix[2][2] };
+}
+
+const math::vector<float, 3> graphics::transform::translation() const
+{
+	return { m_translation_matrix[0][3], m_translation_matrix[1][3], m_translation_matrix[2][3] };
+}
+
 void graphics::transform::scale(const math::vector<float, 3>& v)
 {
 	m_scaling_matrix[0][0] = v[0];

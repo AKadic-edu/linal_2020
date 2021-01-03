@@ -6,6 +6,9 @@ enum class keys {
 	d,
 	s,
 	w,
+
+	space,
+	lshift,
 };
 
 #endif // !SPACE_INVADERS_3D_SHARED_KEYS_HPP

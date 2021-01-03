@@ -10,6 +10,9 @@ namespace graphics {
 	public:
 		transform();
 
+		const math::vector<float, 3> scale() const;
+		const math::vector<float, 3> translation() const;
+
 		void scale(const math::vector<float, 3>& v);
 		void translate(const math::vector<float, 3>& v);
 

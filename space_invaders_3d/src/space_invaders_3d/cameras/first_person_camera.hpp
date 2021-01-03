@@ -18,7 +18,7 @@ public:
 	const graphics::camera& camera();
 private:
 	static constexpr float CAMERA_SPEED = 10.0f;
-	static constexpr float CAMERA_SENSITIVITY = 0.1f;
+	static constexpr float MOUSE_SENSITIVITY = 0.5f;
 
 	graphics::camera m_camera;
 

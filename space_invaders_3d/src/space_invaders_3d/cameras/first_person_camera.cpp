@@ -32,8 +32,8 @@ void first_person_camera::on_keydown(const keys& key)
 
 void first_person_camera::on_mouse_move(int mouse_x, int mouse_y)
 {
-	m_yaw -= mouse_x * CAMERA_SENSITIVITY;
-	m_pitch += mouse_y * CAMERA_SENSITIVITY;
+	m_yaw -= mouse_x * MOUSE_SENSITIVITY;
+	m_pitch += mouse_y * MOUSE_SENSITIVITY;
 
 	if (m_pitch > 89.0f)
 		m_pitch = 89.0f;

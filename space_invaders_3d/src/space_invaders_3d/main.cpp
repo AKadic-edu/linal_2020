@@ -1,4 +1,5 @@
 #include <map>
+#include <memory>
 
 #include <SDL2/SDL.h>
 
@@ -7,6 +8,8 @@
 #include <graphics/io/model_loader.hpp>
 
 #include "src/space_invaders_3d/cameras/first_person_camera.hpp"
+#include "src/space_invaders_3d/game_objects/bullet.hpp"
+#include "src/space_invaders_3d/game_objects/space_ship.hpp"
 #include "src/space_invaders_3d/game_objects/target.hpp"
 #include "src/space_invaders_3d/models/cube.hpp"
 #include "src/space_invaders_3d/shared/keys.hpp"
@@ -16,14 +19,28 @@ std::map<const SDL_Keycode, keys> key_map {
     { SDLK_d, keys::d },
     { SDLK_s, keys::s },
     { SDLK_w, keys::w },
+
+    { SDLK_SPACE, keys::space },
+    { SDLK_LSHIFT, keys::lshift },
 };
 
+graphics::scene s;
+
 first_person_camera camera;
-target t1, t2, t3;
+
+std::vector<std::unique_ptr<game_object>> game_objects;
+space_ship ship { s, game_objects };
 
 void processInput(const SDL_KeyboardEvent& e)
 {
-    camera.on_keydown(key_map[e.keysym.sym]);
+    const keys key = key_map[e.keysym.sym];
+
+    camera.on_keydown(key);
+    
+    if (key == keys::lshift)
+        ship.on_gas_pressed();
+    if (key == keys::space)
+        ship.on_fire_bullet();
 }
 
 void processInput(const SDL_MouseMotionEvent& e)
@@ -35,8 +52,6 @@ int main(int argc, char* argv[])
 {
     graphics::model_loader ml;
 
-    graphics::scene s;
-
     // init models
     s.models.push_back(std::make_unique<cube>());
     s.models.push_back(ml.load("assets/models/sphere.obj"));
@@ -47,16 +62,9 @@ int main(int argc, char* argv[])
     s.cameras.push_back(camera.camera());
     s.primary_camera = 0;
 
-    // target1
-    auto& t1_transform = t1.transform();
-    s.transforms.push_back(t1_transform);
-    //s.instances.push_back({ 1, 0 });
-
     // spaceship
-    graphics::transform spaceship_t;
-    spaceship_t.translate({ 5.0f, 0.0f, 0.0f });
-    s.transforms.push_back(spaceship_t);
-    s.instances.push_back({ 2, 1 });
+    s.transforms.push_back(ship.transform());
+    s.instances.push_back({ 2, (int)s.transforms.size() - 1 });
 
     bool running = true;
 
@@ -88,7 +96,10 @@ int main(int argc, char* argv[])
             }
         }
 
-        //t1.on_update(dt);
+        ship.on_update(dt);
+
+        for (auto& game_object : game_objects)
+            game_object->on_update(dt);
 
         renderer->draw(s);
     }
