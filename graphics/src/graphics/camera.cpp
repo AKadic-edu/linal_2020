@@ -2,7 +2,9 @@
 
 #include <cmath>
 
-#include <math/pi.hpp>
+#include <math/utils.hpp>
+
+#include <glm/gtc/matrix_transform.hpp>
 
 math::matrix<float, 4, 4> graphics::camera::view() const
 {
@@ -50,7 +52,7 @@ math::matrix<float, 4, 4> graphics::create_perspective()
 {
     float fov = 90.0f;
     float far = 100.0f, near = 0.1f;
-    float scale = 1.0f / std::tan((fov / 2.0f) * (math::pi() / 180.0f));
+    float scale = 1 / std::tan(math::radians(fov / 2.0f));
 
     math::matrix<float, 4, 4> projection = math::matrix<float, 4, 4>::identity();
     projection[0][0] = scale;
@@ -60,4 +62,28 @@ math::matrix<float, 4, 4> graphics::create_perspective()
     projection[2][3] = (-far * near) / (far - near);
 
     return projection;
+
+ //   auto mat = glm::perspective(glm::radians(45.0f), (float)640 / (float)480, 0.1f, 100.0f);
+	//math::matrix<float, 4, 4> out = math::matrix<float, 4, 4>::identity();
+	//out[0][0] = mat[0][0];
+	//out[0][1] = mat[1][0];
+	//out[0][2] = mat[2][0];
+	//out[0][3] = mat[3][0];
+
+	//out[1][0] = mat[0][1];
+	//out[1][1] = mat[1][1];
+	//out[1][2] = mat[2][1];
+	//out[1][3] = mat[3][1];
+
+	//out[2][0] = mat[0][2];
+	//out[2][1] = mat[1][2];
+	//out[2][2] = mat[2][2];
+	//out[2][3] = mat[3][2];
+
+	//out[3][0] = mat[0][3];
+	//out[3][1] = mat[1][3];
+	//out[3][2] = mat[2][3];
+	//out[3][3] = mat[3][3];
+
+	//return out.transpose();
 }

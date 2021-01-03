@@ -17,13 +17,17 @@ public:
 
 	const graphics::camera& camera();
 private:
-	static constexpr float CAMERA_SPEED = 0.5f;
+	static constexpr float CAMERA_SPEED = 10.0f;
+	static constexpr float CAMERA_SENSITIVITY = 0.1f;
 
 	graphics::camera m_camera;
 
 	math::vector<float, 3> m_pos;
 	math::vector<float, 3> m_front;
 	math::vector<float, 3> m_up;
+
+	float m_yaw;
+	float m_pitch;
 
 	void update_camera();
 };

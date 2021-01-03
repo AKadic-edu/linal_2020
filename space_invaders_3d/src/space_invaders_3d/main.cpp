@@ -25,6 +25,11 @@ void processInput(const SDL_KeyboardEvent& e)
     camera.on_keydown(key_map[e.keysym.sym]);
 }
 
+void processInput(const SDL_MouseMotionEvent& e)
+{
+    camera.on_mouse_move(e.xrel, e.yrel);
+}
+
 int main(int argc, char* argv[])
 {
     graphics::scene s;
@@ -60,6 +65,9 @@ int main(int argc, char* argv[])
             case SDL_KEYDOWN:
                 processInput(e.key);
                 break;
+            case SDL_MOUSEMOTION:
+                processInput(e.motion);
+                break;
             case SDL_QUIT:
                 running = false;
                 break;
@@ -68,7 +76,7 @@ int main(int argc, char* argv[])
             }
         }
 
-        t1.on_update(dt);
+        //t1.on_update(dt);
 
         renderer->draw(s);
     }
