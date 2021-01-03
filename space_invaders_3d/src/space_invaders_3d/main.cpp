@@ -4,6 +4,7 @@
 
 #include <graphics/renderer.hpp>
 #include <graphics/scene.hpp>
+#include <graphics/io/model_loader.hpp>
 
 #include "src/space_invaders_3d/cameras/first_person_camera.hpp"
 #include "src/space_invaders_3d/game_objects/target.hpp"
@@ -32,10 +33,13 @@ void processInput(const SDL_MouseMotionEvent& e)
 
 int main(int argc, char* argv[])
 {
+    graphics::model_loader ml;
+
     graphics::scene s;
 
     // init models
     s.models.push_back(std::make_unique<cube>());
+    s.models.push_back(ml.load("assets/models/sphere.obj"));
 
     // init camera
     s.cameras.push_back(camera.camera());
@@ -44,7 +48,7 @@ int main(int argc, char* argv[])
     // target1
     auto& t1_transform = t1.transform();
     s.transforms.push_back(t1_transform);
-    s.instances.push_back({ 0, 0 });
+    s.instances.push_back({ 1, 0 });
 
     bool running = true;
 
@@ -76,7 +80,7 @@ int main(int argc, char* argv[])
             }
         }
 
-        //t1.on_update(dt);
+        t1.on_update(dt);
 
         renderer->draw(s);
     }

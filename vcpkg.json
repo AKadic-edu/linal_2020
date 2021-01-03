@@ -4,6 +4,7 @@
   "dependencies": [
     "catch2",
     "sdl2",
-    "glm"
+    "glm",
+    "tinyobjloader"
   ]
 }

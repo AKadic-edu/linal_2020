@@ -1,7 +1,10 @@
 add_library(graphics STATIC 
 	"src/graphics/camera.cpp"
 	"src/graphics/transform.cpp"
-	"src/graphics/sdl2/sdl2_renderer.cpp" "include/graphics/instance.hpp")
+	"src/graphics/io/model_loader.cpp"
+	"src/graphics/io/obj_parser.cpp"
+	"src/graphics/primitives/model3d.cpp"
+	"src/graphics/sdl2/sdl2_renderer.cpp")
 
 target_include_directories(graphics
 	INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"

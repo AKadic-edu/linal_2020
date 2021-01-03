@@ -10,7 +10,7 @@ namespace graphics {
 
 	class model {
 	public:
-		virtual void draw(renderer& r, const math::matrix<float, 4, 4>& t) = 0;
+		virtual void draw(renderer& r, const math::matrix<float, 4, 4>& mvp) = 0;
 	};
 }
 
