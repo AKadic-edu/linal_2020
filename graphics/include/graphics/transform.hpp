@@ -11,6 +11,7 @@ namespace graphics {
 		transform();
 
 		void scale(const math::vector<float, 3>& v);
+		void translate(const math::vector<float, 3>& v);
 
 		math::matrix<float, 4, 4> matrix() const;
 	private:

@@ -40,6 +40,8 @@ int main(int argc, char* argv[])
     // init models
     s.models.push_back(std::make_unique<cube>());
     s.models.push_back(ml.load("assets/models/sphere.obj"));
+    s.models.push_back(ml.load("assets/models/spaceship.obj"));
+    s.models.push_back(ml.load("assets/models/target.obj"));
 
     // init camera
     s.cameras.push_back(camera.camera());
@@ -48,7 +50,13 @@ int main(int argc, char* argv[])
     // target1
     auto& t1_transform = t1.transform();
     s.transforms.push_back(t1_transform);
-    s.instances.push_back({ 1, 0 });
+    //s.instances.push_back({ 1, 0 });
+
+    // spaceship
+    graphics::transform spaceship_t;
+    spaceship_t.translate({ 5.0f, 0.0f, 0.0f });
+    s.transforms.push_back(spaceship_t);
+    s.instances.push_back({ 2, 1 });
 
     bool running = true;
 
@@ -80,7 +88,7 @@ int main(int argc, char* argv[])
             }
         }
 
-        t1.on_update(dt);
+        //t1.on_update(dt);
 
         renderer->draw(s);
     }
